@@ -1,0 +1,12 @@
+# Virtual environment created for this exercise
+.venv/
+
+# Downloaded base model and trained adapters (large binaries)
+models/
+
+# Local caches redirected into the workspace
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]

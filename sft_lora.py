@@ -17,6 +17,13 @@ import random
 import numpy as np
 import torch
 
+# TRL patches the model with a Triton "chunked log-prob" LM head. Triton ships no
+# Windows wheels, so this installs a pure-PyTorch implementation of the same
+# kernel (identical results and gradients, one vocabulary chunk at a time).
+import trl_windows_compat
+
+trl_windows_compat.install()
+
 SEED = 48391
 
 random.seed(SEED)

@@ -1,5 +1,6 @@
 import torch
 import json
+import sys
 
 from transformers import (
     AutoTokenizer
@@ -10,8 +11,15 @@ from peft import (
 )
 
 
+# Which adapter to test. Defaults to the V1 adapter, and it can be pointed at the
+# V2/V3 adapters without editing the file:
+#
+#   python test_specialized.py models/specialized_adapter_v2
+#
 MODEL_PATH = (
-    "models/specialized_adapter"
+    sys.argv[1]
+    if len(sys.argv) > 1
+    else "models/specialized_adapter"
 )
 
 

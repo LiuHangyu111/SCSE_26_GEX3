@@ -3,6 +3,13 @@ from transformers import AutoTokenizer
 from peft import AutoPeftModelForCausalLM
 from trl import SFTTrainer, SFTConfig
 
+# TRL patches the model with a Triton "chunked log-prob" LM head. Triton ships no
+# Windows wheels, so this installs a pure-PyTorch implementation of the same
+# kernel (identical results and gradients, one vocabulary chunk at a time).
+import trl_windows_compat
+
+trl_windows_compat.install()
+
 MODEL_PATH = "models/domain_adapter"
 
 model = AutoPeftModelForCausalLM.from_pretrained(
